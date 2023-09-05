@@ -10,6 +10,7 @@ public class DressResource {
     @GET
     @Produces(value = MediaType.APPLICATION_JSON)
     public Dress[] getAll() {
+
         Dress dress1 = new Dress();
         dress1.setName("Vestido 1");
         dress1.setSize("M");
@@ -29,6 +30,7 @@ public class DressResource {
         list[0] = dress1;
         list[1] = dress2;
         list[2] = dress3;
+
         return list;
     }
 
@@ -36,6 +38,7 @@ public class DressResource {
     @Produces(value = MediaType.APPLICATION_JSON)
     @Path("/{id}")
     public Dress getOne(@PathParam("id") int id) {
+
         Dress dress1 = new Dress();
         dress1.setName("Vestido 1");
         dress1.setSize("M");
@@ -69,6 +72,7 @@ public class DressResource {
     @Consumes(value = MediaType.APPLICATION_JSON)
     @Produces(value = MediaType.APPLICATION_JSON)
     public Dress[] create(Dress dress) {
+
         Dress dress1 = new Dress();
         dress1.setName("Vestido 1");
         dress1.setSize("M");

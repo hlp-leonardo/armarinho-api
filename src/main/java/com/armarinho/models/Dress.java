@@ -1,6 +1,7 @@
 package com.armarinho.models;
 
 public class Dress {
+
     private String name;
     private String size;
     private long id;

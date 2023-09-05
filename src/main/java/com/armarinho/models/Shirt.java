@@ -1,6 +1,6 @@
 package com.armarinho.models;
 
-public class Tshirt {
+public class Shirt {
 
     private String name;
     private String size;
