@@ -6,6 +6,9 @@
     <persistence-unit name="armarinho_pu" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>com.armarinho.models.ProductType</class>
+        <class>com.armarinho.models.ProductSize</class>
+        <class>com.armarinho.models.ProductColor</class>
+        <class>com.armarinho.models.Product</class>
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/armarinhodb"/>
