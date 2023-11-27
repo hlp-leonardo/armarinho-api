@@ -21,6 +21,14 @@ public class Product {
     @JoinColumn(name = "PRODUCT_TYPE_FK")
     private ProductType productType;
 
+    @ManyToOne
+    @JoinColumn(name = "PRODUCT_SIZE_FK")
+    private ProductSize productSize;
+
+    @ManyToOne
+    @JoinColumn(name = "PRODUCT_COLOR_FK")
+    private ProductColor productColor;
+
     public Integer getId() {
         return id;
     }
@@ -51,5 +59,21 @@ public class Product {
 
     public void setProductType(ProductType productType) {
         this.productType = productType;
+    }
+
+    public ProductSize getProductSize() {
+        return productSize;
+    }
+
+    public void setProductSize(ProductSize productSize) {
+        this.productSize = productSize;
+    }
+
+    public ProductColor getProductColor() {
+        return productColor;
+    }
+
+    public void setProductColor(ProductColor productColor) {
+        this.productColor = productColor;
     }
 }

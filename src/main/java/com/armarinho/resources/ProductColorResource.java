@@ -14,6 +14,7 @@ public class ProductColorResource {
     @Produces(value = MediaType.APPLICATION_JSON)
     @Consumes(value = MediaType.APPLICATION_JSON)
     public ProductColor create(ProductColor productColor) throws Exception {
+
         ProductColorService service = new ProductColorService();
         ProductColor createResource = service.create(productColor);
 
@@ -23,6 +24,7 @@ public class ProductColorResource {
     @GET
     @Produces(value = MediaType.APPLICATION_JSON)
     public List<ProductColor> getAll() throws Exception {
+
         ProductColorService service = new ProductColorService();
         List<ProductColor> getAllResourceList = service.getAll();
 
@@ -33,6 +35,7 @@ public class ProductColorResource {
     @Produces(value = MediaType.APPLICATION_JSON)
     @Path("/{id}")
     public ProductColor getOne(@PathParam("id") int id) throws Exception {
+
         ProductColorService service = new ProductColorService();
         ProductColor getOneResource = service.getOne(id);
 
@@ -44,6 +47,7 @@ public class ProductColorResource {
     @Consumes(value = MediaType.APPLICATION_JSON)
     @Path("/{id}")
     public ProductColor update(@PathParam("id") int id, ProductColor productColor) throws Exception {
+
         ProductColorService service = new ProductColorService();
         ProductColor updateResource = service.update(id, productColor);
 
@@ -55,6 +59,7 @@ public class ProductColorResource {
     @Consumes(value = MediaType.APPLICATION_JSON)
     @Path("/{id}")
     public void delete(@PathParam("id") int id) throws Exception {
+
         ProductColorService service = new ProductColorService();
         service.delete(id);
 

@@ -2,6 +2,8 @@ package com.armarinho.models;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "PRODUCT_SIZES")
 public class ProductSize {
@@ -13,6 +15,9 @@ public class ProductSize {
 
     @Column(name = "PRODUCT_SIZE_NAME")
     private String name;
+
+    @OneToMany(mappedBy = "productSize")
+    private List<Product> product;
 
     public Integer getId() {
         return id;
@@ -28,5 +33,13 @@ public class ProductSize {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Product> getProduct() {
+        return product;
+    }
+
+    public void setProduct(List<Product> product) {
+        this.product = product;
     }
 }
