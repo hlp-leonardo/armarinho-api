@@ -37,10 +37,10 @@ public class ProductTypeResource {
     @Path("/{id}")
     public ProductType getOne(@PathParam("id") int id) throws Exception {
 
-            ProductTypeService service = new ProductTypeService();
-            ProductType getOneResource = service.getOne(id);
+        ProductTypeService service = new ProductTypeService();
+        ProductType getOneResource = service.getOne(id);
 
-            return getOneResource;
+        return getOneResource;
     }
 
     @PUT

@@ -1,6 +1,7 @@
 package com.armarinho.daos;
 
 import com.armarinho.models.Sale;
+
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -89,7 +90,5 @@ public class SaleDao {
         em.getTransaction().begin();
         em.remove(sale);
         em.getTransaction().commit();
-
     }
-
 }

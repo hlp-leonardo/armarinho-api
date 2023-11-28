@@ -36,8 +36,10 @@ public class ProductTypeDao {
     public ProductType create(ProductType productType) {
 
         EntityManager em = createEntityManager();
+
         productType.setId(productType.getId());
         productType.setName(productType.getName());
+
         em.getTransaction().begin();
         em.persist(productType);
         em.getTransaction().commit();

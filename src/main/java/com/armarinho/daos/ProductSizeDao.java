@@ -36,6 +36,7 @@ public class ProductSizeDao {
     public ProductSize create(ProductSize productSize) {
 
         EntityManager em = createEntityManager();
+
         productSize.setId(productSize.getId());
         productSize.setName(productSize.getName());
 

@@ -6,6 +6,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
+import jakarta.persistence.NoResultException;
 
 import java.util.List;
 
@@ -73,10 +74,16 @@ public class ProductColorService {
 
     public ProductColor getOne(Integer id) throws Exception {
 
-        ProductColorDao dao = new ProductColorDao();
-        ProductColor getOneService = dao.getOne(id);
+        checkIdNull(id);
 
-        return getOneService;
+        try {
+            ProductColorDao dao = new ProductColorDao();
+            ProductColor getOneService = dao.getOne(id);
+
+            return getOneService;
+        } catch (NoResultException e) {
+            throw new Exception("Product color did not find with given id.");
+        }
     }
 
     public ProductColor update(int id, ProductColor productColor) throws Exception {
@@ -95,7 +102,11 @@ public class ProductColorService {
 
         checkIdNull(id);
 
-        ProductColorDao dao = new ProductColorDao();
-        dao.delete(id);
+        try {
+            ProductColorDao dao = new ProductColorDao();
+            dao.delete(id);
+        } catch (Exception e) {
+            throw new Exception("Product color could not be deleted.");
+        }
     }
 }

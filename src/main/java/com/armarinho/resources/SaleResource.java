@@ -2,6 +2,7 @@ package com.armarinho.resources;
 
 import com.armarinho.models.Sale;
 import com.armarinho.services.SaleService;
+
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 
@@ -62,6 +63,5 @@ public class SaleResource {
 
         SaleService service = new SaleService();
         service.delete(id);
-
     }
 }

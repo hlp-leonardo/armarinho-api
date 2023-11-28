@@ -1,6 +1,7 @@
 package com.armarinho.daos;
 
 import com.armarinho.models.ProductColor;
+
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -35,6 +36,7 @@ public class ProductColorDao {
     public ProductColor create(ProductColor productColor) throws Exception {
 
         EntityManager em = createEntityManager();
+
         productColor.setId(productColor.getId());
         productColor.setName(productColor.getName());
 
@@ -54,6 +56,7 @@ public class ProductColorDao {
     }
 
     public ProductColor getOne(Integer id) throws Exception {
+
         TypedQuery<ProductColor> query = createTypedQuerySingleResult(id);
         ProductColor getOneDao = query.getSingleResult();
 
@@ -61,6 +64,7 @@ public class ProductColorDao {
     }
 
     public ProductColor update(Integer id, ProductColor productColor) throws Exception {
+
         EntityManager em = createEntityManager();
         TypedQuery<ProductColor> query = createTypedQuerySingleResult(id);
 
@@ -76,6 +80,7 @@ public class ProductColorDao {
     }
 
     public void delete(Integer id) throws Exception {
+
         EntityManager em = createEntityManager();
         TypedQuery<ProductColor> query = em.createQuery("select p from ProductColor p where p.id = :id", ProductColor.class);
         query.setParameter("id", id);

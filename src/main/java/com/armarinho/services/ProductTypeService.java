@@ -2,6 +2,10 @@ package com.armarinho.services;
 
 import com.armarinho.daos.ProductTypeDao;
 import com.armarinho.models.ProductType;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
+import jakarta.persistence.TypedQuery;
 import jakarta.persistence.NoResultException;
 
 import java.util.List;
@@ -15,17 +19,40 @@ public class ProductTypeService {
         }
     }
 
-    public void checkProductTypeName(ProductType productType) throws Exception {
+    private void checkIfTypeNameIsBlank(ProductType productType) throws Exception {
+
         productType.setName(productType.getName().trim());
         String checkName = productType.getName();
-        if (checkName.length() < 1) {
-            throw new Exception("Product type name can't be blank.");
+
+        if (checkName.isEmpty()) {
+            throw new Exception("Product size name can not be blank.");
+        }
+    }
+
+    public void checkIfTypeNameExists(ProductType productType) throws Exception {
+
+        productType.setName(productType.getName().trim());
+        String newTypeName = productType.getName();
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("armarinho_pu");
+        EntityManager em = emf.createEntityManager();
+
+        TypedQuery<ProductType> queryList = em.createQuery("select p from ProductType p", ProductType.class);
+        List<ProductType> list = queryList.getResultList();
+
+        for (Integer i=1; i< list.size(); i++) {
+            ProductType existingTypeName = list.get(i);
+            existingTypeName.getName();
+            if (existingTypeName.getName().equals(newTypeName)) {
+                throw new Exception("Product type name already exists.");
+            }
         }
     }
 
     public ProductType create(ProductType productType) throws Exception {
 
-        checkProductTypeName(productType);
+        checkIfTypeNameIsBlank(productType);
+        checkIfTypeNameExists(productType);
 
         try {
             ProductTypeDao dao = new ProductTypeDao();
@@ -62,7 +89,8 @@ public class ProductTypeService {
     public ProductType update(Integer id, ProductType productType) throws Exception {
 
         checkIdNull(id);
-        checkProductTypeName(productType);
+        checkIfTypeNameIsBlank(productType);
+        checkIfTypeNameExists(productType);
 
         ProductTypeDao dao = new ProductTypeDao();
         ProductType updateService = dao.update(id, productType);
