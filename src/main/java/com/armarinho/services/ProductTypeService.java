@@ -1,6 +1,7 @@
 package com.armarinho.services;
 
 import com.armarinho.daos.ProductTypeDao;
+import com.armarinho.dtos.ProductTypeDTO;
 import com.armarinho.models.ProductType;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -8,6 +9,7 @@ import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.NoResultException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductTypeService {
@@ -56,20 +58,34 @@ public class ProductTypeService {
 
         try {
             ProductTypeDao dao = new ProductTypeDao();
-            ProductType createService = dao.create(productType);
+            ProductType createProductType = dao.create(productType);
 
-            return createService;
+            return createProductType;
         } catch (Exception e) {
             throw new Exception("Product type could not be created.");
         }
     }
 
-    public List<ProductType> getAll() {
+    public List<ProductTypeDTO> getAll() throws Exception {
 
         ProductTypeDao dao = new ProductTypeDao();
-        List<ProductType> getAllServiceList = dao.getAll();
+        List<ProductType> allProductTypes = dao.getAll();
 
-        return getAllServiceList;
+        List<ProductTypeDTO> productTypeDTOList = new ArrayList<>();
+
+        for (int i=0; i<allProductTypes.size(); i++) {
+            ProductType existingProductTypeDTO = allProductTypes.get(i);
+            if (existingProductTypeDTO != null) {
+                ProductTypeDTO productTypeDTO = new ProductTypeDTO();
+                int id = existingProductTypeDTO.getId();
+                String name = existingProductTypeDTO.getName();
+                productTypeDTO.setId(id);
+                productTypeDTO.setName(name);
+                productTypeDTOList.add(productTypeDTO);
+            }
+        }
+
+        return productTypeDTOList;
     }
 
     public ProductType getOne(Integer id) throws Exception {
@@ -78,9 +94,9 @@ public class ProductTypeService {
 
         try {
             ProductTypeDao dao = new ProductTypeDao();
-            ProductType getOneService = dao.getOne(id);
+            ProductType getOneProductType = dao.getOne(id);
 
-            return getOneService;
+            return getOneProductType;
         } catch (NoResultException e) {
             throw new Exception("Product type did not find with given id.");
         }
@@ -93,9 +109,9 @@ public class ProductTypeService {
         checkIfTypeNameExists(productType);
 
         ProductTypeDao dao = new ProductTypeDao();
-        ProductType updateService = dao.update(id, productType);
+        ProductType updateProductType = dao.update(id, productType);
 
-        return updateService;
+        return updateProductType;
     }
 
     public void delete(Integer id) throws Exception {

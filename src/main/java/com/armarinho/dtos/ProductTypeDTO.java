@@ -1,19 +1,9 @@
-package com.armarinho.models;
+package com.armarinho.dtos;
 
-import jakarta.persistence.*;
+public class ProductTypeDTO {
 
-import java.util.List;
-
-@Entity
-@Table(name = "PRODUCT_COLORS")
-public class ProductColor {
-
-    @Id
-    @Column(name = "PRODUCT_COLOR_ID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "PRODUCT_COLOR_NAME")
     private String name;
 
     public Integer getId() {

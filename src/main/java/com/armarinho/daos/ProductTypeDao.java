@@ -50,9 +50,9 @@ public class ProductTypeDao {
     public List<ProductType> getAll() {
 
         TypedQuery<ProductType> query = createTypedQueryList();
-        List<ProductType> list = query.getResultList();
+        List<ProductType> productTypeList = query.getResultList();
 
-        return list;
+        return productTypeList;
     }
 
     public ProductType getOne(int id) {
