@@ -17,9 +17,9 @@ public class SaleResource {
     public Sale create(Sale sale) {
 
         SaleService service = new SaleService();
-        Sale createResource = service.create(sale);
+        Sale createSale = service.create(sale);
 
-        return createResource;
+        return createSale;
     }
 
     @GET
@@ -27,9 +27,9 @@ public class SaleResource {
     public List<Sale> getAll() {
 
         SaleService service = new SaleService();
-        List<Sale> getAllResource = service.getAll();
+        List<Sale> allSales = service.getAll();
 
-        return getAllResource;
+        return allSales;
     }
 
     @GET
@@ -38,9 +38,9 @@ public class SaleResource {
     public Sale getOne(@PathParam("id") int id) throws Exception {
 
         SaleService service = new SaleService();
-        Sale getOneResource = service.getOne(id);
+        Sale sale = service.getOne(id);
 
-        return getOneResource;
+        return sale;
     }
 
     @PUT
@@ -50,9 +50,9 @@ public class SaleResource {
     public Sale update(@PathParam("id") int id, Sale sale) throws Exception {
 
         SaleService service = new SaleService();
-        Sale updateResource = service.update(id, sale);
+        Sale updateSale = service.update(id, sale);
 
-        return updateResource;
+        return updateSale;
     }
 
     @DELETE

@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 
 import java.util.List;
 
-public class ProductColorDao {
+public class ProductColorDAO {
 
     private EntityManager createEntityManager() {
 
@@ -58,9 +58,9 @@ public class ProductColorDao {
     public ProductColor getOne(Integer id) throws Exception {
 
         TypedQuery<ProductColor> query = createTypedQuerySingleResult(id);
-        ProductColor getOneDao = query.getSingleResult();
+        ProductColor productColor = query.getSingleResult();
 
-        return getOneDao;
+        return productColor;
     }
 
     public ProductColor update(Integer id, ProductColor productColor) throws Exception {

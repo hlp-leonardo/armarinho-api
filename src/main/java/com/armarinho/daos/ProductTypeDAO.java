@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 
 import java.util.List;
 
-public class ProductTypeDao {
+public class ProductTypeDAO {
 
     private EntityManager createEntityManager() {
 

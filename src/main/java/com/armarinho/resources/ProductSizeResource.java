@@ -1,5 +1,6 @@
 package com.armarinho.resources;
 
+import com.armarinho.dtos.ProductSizeDTO;
 import com.armarinho.models.ProductSize;
 import com.armarinho.services.ProductSizeService;
 
@@ -17,19 +18,19 @@ public class ProductSizeResource {
     public ProductSize create(ProductSize productSize) throws Exception {
 
         ProductSizeService service = new ProductSizeService();
-        ProductSize createResource = service.create(productSize);
+        ProductSize createProductSize = service.create(productSize);
 
-        return createResource;
+        return createProductSize;
     }
 
     @GET
     @Produces(value = MediaType.APPLICATION_JSON)
-    public List<ProductSize> getAll() throws Exception {
+    public List<ProductSizeDTO> getAll() throws Exception {
 
         ProductSizeService service = new ProductSizeService();
-        List<ProductSize> getAllResourceList = service.getAll();
+        List<ProductSizeDTO> allProductSizes = service.getAll();
 
-        return getAllResourceList;
+        return allProductSizes;
     }
 
     @GET
@@ -38,9 +39,9 @@ public class ProductSizeResource {
     public ProductSize getOne(@PathParam("id") int id) throws Exception {
 
         ProductSizeService service = new ProductSizeService();
-        ProductSize getOneResource = service.getOne(id);
+        ProductSize productSize = service.getOne(id);
 
-        return getOneResource;
+        return productSize;
     }
 
     @PUT
@@ -50,9 +51,9 @@ public class ProductSizeResource {
     public ProductSize update(@PathParam("id") Integer id, ProductSize productSize) throws Exception {
 
         ProductSizeService service = new ProductSizeService();
-        ProductSize updateResource = service.update(id, productSize);
+        ProductSize updateProductSize = service.update(id, productSize);
 
-        return updateResource;
+        return updateProductSize;
     }
 
     @DELETE

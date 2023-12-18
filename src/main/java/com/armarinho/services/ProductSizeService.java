@@ -1,6 +1,7 @@
 package com.armarinho.services;
 
-import com.armarinho.daos.ProductSizeDao;
+import com.armarinho.daos.ProductSizeDAO;
+import com.armarinho.dtos.ProductSizeDTO;
 import com.armarinho.models.ProductSize;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -8,6 +9,7 @@ import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.NoResultException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductSizeService {
@@ -55,21 +57,33 @@ public class ProductSizeService {
         checkIfSizeNameExists(productSize);
 
         try {
-            ProductSizeDao dao = new ProductSizeDao();
-            ProductSize createService = dao.create(productSize);
+            ProductSizeDAO dao = new ProductSizeDAO();
+            ProductSize createProductSize = dao.create(productSize);
 
-            return createService;
+            return createProductSize;
         } catch (Exception e) {
             throw new Exception("Product size could not be created.");
         }
     }
 
-    public List<ProductSize> getAll() {
+    public List<ProductSizeDTO> getAll() {
 
-        ProductSizeDao dao = new ProductSizeDao();
-        List<ProductSize> getAllServiceList = dao.getAll();
+        ProductSizeDAO dao = new ProductSizeDAO();
+        List<ProductSize> allProductSizes = dao.getAll();
 
-        return getAllServiceList;
+        List<ProductSizeDTO> productSizeDTOLis = new ArrayList<>();
+
+        for (int i=0; i<allProductSizes.size(); i++) {
+            ProductSize existingProductSizeDTO = allProductSizes.get(i);
+            if (existingProductSizeDTO != null) {
+                ProductSizeDTO productSizeDTO = new ProductSizeDTO();
+                productSizeDTO.setId(existingProductSizeDTO.getId());
+                productSizeDTO.setName(existingProductSizeDTO.getName());
+                productSizeDTOLis.add(productSizeDTO);
+            }
+        }
+
+        return productSizeDTOLis;
     }
 
     public ProductSize getOne(Integer id) throws Exception {
@@ -77,10 +91,10 @@ public class ProductSizeService {
         checkIdNull(id);
 
         try {
-            ProductSizeDao dao = new ProductSizeDao();
-            ProductSize getOneService = dao.getOne(id);
+            ProductSizeDAO dao = new ProductSizeDAO();
+            ProductSize productSize = dao.getOne(id);
 
-            return getOneService;
+            return productSize;
         } catch (NoResultException e) {
             throw new Exception("Product size did not find with given id.");
         }
@@ -92,10 +106,10 @@ public class ProductSizeService {
         checkIfSizeNameIsBlank(productSize);
         checkIfSizeNameExists(productSize);
 
-        ProductSizeDao dao = new ProductSizeDao();
-        ProductSize updateService = dao.update(id, productSize);
+        ProductSizeDAO dao = new ProductSizeDAO();
+        ProductSize updateProductSize = dao.update(id, productSize);
 
-        return updateService;
+        return updateProductSize;
     }
 
     public void delete(Integer id) throws Exception {
@@ -103,7 +117,7 @@ public class ProductSizeService {
         checkIdNull(id);
 
         try {
-            ProductSizeDao dao = new ProductSizeDao();
+            ProductSizeDAO dao = new ProductSizeDAO();
             dao.delete(id);
         } catch (Exception e) {
             throw new Exception("Product size could not be deleted.");

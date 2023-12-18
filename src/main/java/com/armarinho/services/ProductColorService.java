@@ -1,6 +1,7 @@
 package com.armarinho.services;
 
-import com.armarinho.daos.ProductColorDao;
+import com.armarinho.daos.ProductColorDAO;
+import com.armarinho.dtos.ProductColorDTO;
 import com.armarinho.models.ProductColor;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -8,6 +9,7 @@ import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.NoResultException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductColorService {
@@ -55,21 +57,35 @@ public class ProductColorService {
         checkIfColorNameExists(productColor);
 
         try {
-            ProductColorDao dao = new ProductColorDao();
-            ProductColor createService = dao.create(productColor);
+            ProductColorDAO dao = new ProductColorDAO();
+            ProductColor createProductColor = dao.create(productColor);
 
-            return createService;
+            return createProductColor;
         } catch (Exception e) {
             throw new Exception("Product color could not be created.");
         }
     }
 
-    public List<ProductColor> getAll() {
+    public List<ProductColorDTO> getAll() throws Exception {
 
-        ProductColorDao dao = new ProductColorDao();
-        List<ProductColor> getAllServiceList = dao.getAll();
+        ProductColorDAO dao = new ProductColorDAO();
+        List<ProductColor> allProductColors = dao.getAll();
 
-        return getAllServiceList;
+        List<ProductColorDTO> productColorDTOList = new ArrayList<>();
+
+        for (int i = 0; i < allProductColors.size(); i++) {
+            ProductColor existingProductColorDTO = allProductColors.get(i);
+            if (existingProductColorDTO != null) {
+                ProductColorDTO productColorDTO = new ProductColorDTO();
+                int id = existingProductColorDTO.getId();
+                String name = existingProductColorDTO.getName();
+                productColorDTO.setId(id);
+                productColorDTO.setName(name);
+                productColorDTOList.add(productColorDTO);
+            }
+        }
+
+        return productColorDTOList;
     }
 
     public ProductColor getOne(Integer id) throws Exception {
@@ -77,25 +93,25 @@ public class ProductColorService {
         checkIdNull(id);
 
         try {
-            ProductColorDao dao = new ProductColorDao();
-            ProductColor getOneService = dao.getOne(id);
+            ProductColorDAO dao = new ProductColorDAO();
+            ProductColor productColor = dao.getOne(id);
 
-            return getOneService;
+            return productColor;
         } catch (NoResultException e) {
             throw new Exception("Product color did not find with given id.");
         }
     }
 
-    public ProductColor update(int id, ProductColor productColor) throws Exception {
+    public ProductColor update(Integer id, ProductColor productColor) throws Exception {
 
         checkIdNull(id);
         checkIfColorNameIsBlank(productColor);
         checkIfColorNameExists(productColor);
 
-        ProductColorDao dao = new ProductColorDao();
-        ProductColor updateService = dao.update(id, productColor);
+        ProductColorDAO dao = new ProductColorDAO();
+        ProductColor updateProductColor = dao.update(id, productColor);
 
-        return updateService;
+        return updateProductColor;
     }
 
     public void delete(int id) throws Exception {
@@ -103,7 +119,7 @@ public class ProductColorService {
         checkIdNull(id);
 
         try {
-            ProductColorDao dao = new ProductColorDao();
+            ProductColorDAO dao = new ProductColorDAO();
             dao.delete(id);
         } catch (Exception e) {
             throw new Exception("Product color could not be deleted.");

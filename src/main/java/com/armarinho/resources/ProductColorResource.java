@@ -1,5 +1,6 @@
 package com.armarinho.resources;
 
+import com.armarinho.dtos.ProductColorDTO;
 import com.armarinho.models.ProductColor;
 import com.armarinho.services.ProductColorService;
 
@@ -17,42 +18,42 @@ public class ProductColorResource {
     public ProductColor create(ProductColor productColor) throws Exception {
 
         ProductColorService service = new ProductColorService();
-        ProductColor createResource = service.create(productColor);
+        ProductColor createProductColor = service.create(productColor);
 
-        return createResource;
+        return createProductColor;
     }
 
     @GET
     @Produces(value = MediaType.APPLICATION_JSON)
-    public List<ProductColor> getAll() throws Exception {
+    public List<ProductColorDTO> getAll() throws Exception {
 
         ProductColorService service = new ProductColorService();
-        List<ProductColor> getAllResourceList = service.getAll();
+        List<ProductColorDTO> allProductColors = service.getAll();
 
-        return getAllResourceList;
+        return allProductColors;
     }
 
     @GET
     @Produces(value = MediaType.APPLICATION_JSON)
     @Path("/{id}")
-    public ProductColor getOne(@PathParam("id") int id) throws Exception {
+    public ProductColor getOne(@PathParam("id") Integer id) throws Exception {
 
         ProductColorService service = new ProductColorService();
-        ProductColor getOneResource = service.getOne(id);
+        ProductColor productColor = service.getOne(id);
 
-        return getOneResource;
+        return productColor;
     }
 
     @PUT
     @Produces(value = MediaType.APPLICATION_JSON)
     @Consumes(value = MediaType.APPLICATION_JSON)
     @Path("/{id}")
-    public ProductColor update(@PathParam("id") int id, ProductColor productColor) throws Exception {
+    public ProductColor update(@PathParam("id") Integer id, ProductColor productColor) throws Exception {
 
         ProductColorService service = new ProductColorService();
-        ProductColor updateResource = service.update(id, productColor);
+        ProductColor updateProductColor = service.update(id, productColor);
 
-        return updateResource;
+        return updateProductColor;
     }
 
     @DELETE

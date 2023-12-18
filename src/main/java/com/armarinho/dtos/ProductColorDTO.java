@@ -1,8 +1,9 @@
 package com.armarinho.dtos;
 
-public class ProductTypeDTO {
+public class ProductColorDTO {
 
     private Integer id;
+
     private String name;
 
     public Integer getId() {

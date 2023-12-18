@@ -28,9 +28,9 @@ public class ProductTypeResource {
     public List<ProductTypeDTO> getAll() throws Exception {
 
         ProductTypeService service = new ProductTypeService();
-        List<ProductTypeDTO> getAllProductType = service.getAll();
+        List<ProductTypeDTO> allProductTypes = service.getAll();
 
-        return getAllProductType;
+        return allProductTypes;
     }
 
     @GET
@@ -39,9 +39,9 @@ public class ProductTypeResource {
     public ProductType getOne(@PathParam("id") int id) throws Exception {
 
         ProductTypeService service = new ProductTypeService();
-        ProductType getOneProductType = service.getOne(id);
+        ProductType ProductType = service.getOne(id);
 
-        return getOneProductType;
+        return ProductType;
     }
 
     @PUT

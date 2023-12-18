@@ -1,6 +1,6 @@
 package com.armarinho.dtos;
 
-public class ProductTypeDTO {
+public class ProductSizeDTO {
 
     private Integer id;
     private String name;

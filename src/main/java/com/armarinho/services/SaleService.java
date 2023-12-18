@@ -1,6 +1,6 @@
 package com.armarinho.services;
 
-import com.armarinho.daos.SaleDao;
+import com.armarinho.daos.SaleDAO;
 import com.armarinho.models.Sale;
 
 import java.util.List;
@@ -16,47 +16,46 @@ public class SaleService {
 
     public Sale create(Sale sale) {
 
-        SaleDao dao = new SaleDao();
-        Sale createService = dao.create(sale);
+        SaleDAO dao = new SaleDAO();
+        Sale createSale = dao.create(sale);
 
-        return createService;
+        return createSale;
     }
 
     public List<Sale> getAll() {
 
-        SaleDao dao = new SaleDao();
-        List<Sale> getAllServiceList = dao.getAll();
+        SaleDAO dao = new SaleDAO();
+        List<Sale> allSales = dao.getAll();
 
-        return getAllServiceList;
+        return allSales;
     }
 
     public Sale getOne(Integer id) throws Exception {
 
         checkIdNull(id);
 
-        SaleDao dao = new SaleDao();
-        Sale getOneService = dao.getOne(id);
+        SaleDAO dao = new SaleDAO();
+        Sale sale = dao.getOne(id);
 
-        return getOneService;
+        return sale;
     }
 
     public Sale update(int id, Sale sale) throws Exception {
 
         checkIdNull(id);
 
-        SaleDao dao = new SaleDao();
-        Sale updateService = dao.update(id, sale);
+        SaleDAO dao = new SaleDAO();
+        Sale updateSale = dao.update(id, sale);
 
-        return updateService;
+        return updateSale;
     }
 
     public void delete(int id) throws Exception {
 
         checkIdNull(id);
 
-        SaleDao dao = new SaleDao();
+        SaleDAO dao = new SaleDAO();
         dao.delete(id);
 
     }
-
 }

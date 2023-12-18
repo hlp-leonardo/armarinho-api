@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 
 import java.util.List;
 
-public class SaleDao {
+public class SaleDAO {
 
     private EntityManager createEntityManager() {
 
@@ -50,17 +50,17 @@ public class SaleDao {
     public List<Sale> getAll() {
 
         TypedQuery<Sale> query = createTypedQueryList();
-        List<Sale> list = query.getResultList();
+        List<Sale> saleList = query.getResultList();
 
-        return list;
+        return saleList;
     }
 
     public Sale getOne(int id) {
 
         TypedQuery<Sale> query = createTypedQuerySingleResult(id);
-        Sale getOneDao = query.getSingleResult();
+        Sale sale = query.getSingleResult();
 
-        return getOneDao;
+        return sale;
     }
 
     public Sale update(int id, Sale sale) {

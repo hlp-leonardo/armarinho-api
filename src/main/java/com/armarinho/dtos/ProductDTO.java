@@ -10,6 +10,8 @@ public class ProductDTO {
 
     private ProductTypeDTO productTypeDTO;
 
+    private ProductColorDTO productColorDTO;
+
     public Integer getId() {
         return id;
     }
@@ -40,5 +42,13 @@ public class ProductDTO {
 
     public void setProductTypeDTO(ProductTypeDTO productTypeDTO) {
         this.productTypeDTO = productTypeDTO;
+    }
+
+    public ProductColorDTO getProductColorDTO() {
+        return productColorDTO;
+    }
+
+    public void setProductColorDTO(ProductColorDTO productColorDTO) {
+        this.productColorDTO = productColorDTO;
     }
 }
