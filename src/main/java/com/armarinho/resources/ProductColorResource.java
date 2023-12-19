@@ -36,10 +36,10 @@ public class ProductColorResource {
     @GET
     @Produces(value = MediaType.APPLICATION_JSON)
     @Path("/{id}")
-    public ProductColor getOne(@PathParam("id") Integer id) throws Exception {
+    public ProductColorDTO getOne(@PathParam("id") Integer id) throws Exception {
 
         ProductColorService service = new ProductColorService();
-        ProductColor productColor = service.getOne(id);
+        ProductColorDTO productColor = service.getOne(id);
 
         return productColor;
     }

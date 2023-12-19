@@ -77,10 +77,8 @@ public class ProductTypeService {
             ProductType existingProductTypeDTO = allProductTypes.get(i);
             if (existingProductTypeDTO != null) {
                 ProductTypeDTO productTypeDTO = new ProductTypeDTO();
-                int id = existingProductTypeDTO.getId();
-                String name = existingProductTypeDTO.getName();
-                productTypeDTO.setId(id);
-                productTypeDTO.setName(name);
+                productTypeDTO.setId(existingProductTypeDTO.getId());
+                productTypeDTO.setName(existingProductTypeDTO.getName());
                 productTypeDTOList.add(productTypeDTO);
             }
         }
@@ -88,15 +86,19 @@ public class ProductTypeService {
         return productTypeDTOList;
     }
 
-    public ProductType getOne(Integer id) throws Exception {
+    public ProductTypeDTO getOne(Integer id) throws Exception {
 
         checkIdNull(id);
 
         try {
             ProductTypeDAO dao = new ProductTypeDAO();
-            ProductType ProductType = dao.getOne(id);
+            ProductType productType = dao.getOne(id);
 
-            return ProductType;
+            ProductTypeDTO productTypeDTO = new ProductTypeDTO();
+            productTypeDTO.setId(productType.getId());
+            productTypeDTO.setName(productType.getName());
+
+            return productTypeDTO;
         } catch (NoResultException e) {
             throw new Exception("Product type did not find with given id.");
         }

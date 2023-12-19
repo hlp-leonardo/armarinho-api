@@ -86,7 +86,7 @@ public class ProductSizeService {
         return productSizeDTOLis;
     }
 
-    public ProductSize getOne(Integer id) throws Exception {
+    public ProductSizeDTO getOne(Integer id) throws Exception {
 
         checkIdNull(id);
 
@@ -94,7 +94,11 @@ public class ProductSizeService {
             ProductSizeDAO dao = new ProductSizeDAO();
             ProductSize productSize = dao.getOne(id);
 
-            return productSize;
+            ProductSizeDTO productSizeDTO = new ProductSizeDTO();
+            productSizeDTO.setId(productSize.getId());
+            productSizeDTO.setName(productSize.getName());
+
+            return productSizeDTO;
         } catch (NoResultException e) {
             throw new Exception("Product size did not find with given id.");
         }

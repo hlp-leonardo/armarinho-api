@@ -77,10 +77,8 @@ public class ProductColorService {
             ProductColor existingProductColorDTO = allProductColors.get(i);
             if (existingProductColorDTO != null) {
                 ProductColorDTO productColorDTO = new ProductColorDTO();
-                int id = existingProductColorDTO.getId();
-                String name = existingProductColorDTO.getName();
-                productColorDTO.setId(id);
-                productColorDTO.setName(name);
+                productColorDTO.setId(existingProductColorDTO.getId());
+                productColorDTO.setName(existingProductColorDTO.getName());
                 productColorDTOList.add(productColorDTO);
             }
         }
@@ -88,7 +86,7 @@ public class ProductColorService {
         return productColorDTOList;
     }
 
-    public ProductColor getOne(Integer id) throws Exception {
+    public ProductColorDTO getOne(Integer id) throws Exception {
 
         checkIdNull(id);
 
@@ -96,7 +94,11 @@ public class ProductColorService {
             ProductColorDAO dao = new ProductColorDAO();
             ProductColor productColor = dao.getOne(id);
 
-            return productColor;
+            ProductColorDTO productColorDTO = new ProductColorDTO();
+            productColorDTO.setId(productColor.getId());
+            productColorDTO.setName(productColor.getName());
+
+            return productColorDTO;
         } catch (NoResultException e) {
             throw new Exception("Product color did not find with given id.");
         }

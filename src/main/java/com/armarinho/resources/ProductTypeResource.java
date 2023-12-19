@@ -36,10 +36,10 @@ public class ProductTypeResource {
     @GET
     @Produces(value = MediaType.APPLICATION_JSON)
     @Path("/{id}")
-    public ProductType getOne(@PathParam("id") int id) throws Exception {
+    public ProductTypeDTO getOne(@PathParam("id") int id) throws Exception {
 
         ProductTypeService service = new ProductTypeService();
-        ProductType ProductType = service.getOne(id);
+        ProductTypeDTO ProductType = service.getOne(id);
 
         return ProductType;
     }

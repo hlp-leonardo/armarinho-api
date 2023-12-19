@@ -36,10 +36,10 @@ public class ProductSizeResource {
     @GET
     @Produces(value = MediaType.APPLICATION_JSON)
     @Path("/{id}")
-    public ProductSize getOne(@PathParam("id") int id) throws Exception {
+    public ProductSizeDTO getOne(@PathParam("id") int id) throws Exception {
 
         ProductSizeService service = new ProductSizeService();
-        ProductSize productSize = service.getOne(id);
+        ProductSizeDTO productSize = service.getOne(id);
 
         return productSize;
     }
