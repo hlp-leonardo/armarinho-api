@@ -51,7 +51,7 @@ public class ProductColorService {
         }
     }
 
-    public ProductColor create(ProductColor productColor) throws Exception {
+    public ProductColorDTO create(ProductColor productColor) throws Exception {
 
         checkIfColorNameIsBlank(productColor);
         checkIfColorNameExists(productColor);
@@ -60,7 +60,11 @@ public class ProductColorService {
             ProductColorDAO dao = new ProductColorDAO();
             ProductColor createProductColor = dao.create(productColor);
 
-            return createProductColor;
+            ProductColorDTO productColorDTO = new ProductColorDTO();
+            productColorDTO.setId(createProductColor.getId());
+            productColorDTO.setName(createProductColor.getName());
+
+            return productColorDTO;
         } catch (Exception e) {
             throw new Exception("Product color could not be created.");
         }
@@ -104,7 +108,7 @@ public class ProductColorService {
         }
     }
 
-    public ProductColor update(Integer id, ProductColor productColor) throws Exception {
+    public ProductColorDTO update(Integer id, ProductColor productColor) throws Exception {
 
         checkIdNull(id);
         checkIfColorNameIsBlank(productColor);
@@ -113,7 +117,11 @@ public class ProductColorService {
         ProductColorDAO dao = new ProductColorDAO();
         ProductColor updateProductColor = dao.update(id, productColor);
 
-        return updateProductColor;
+        ProductColorDTO productColorDTO = new ProductColorDTO();
+        productColorDTO.setId(updateProductColor.getId());
+        productColorDTO.setName(updateProductColor.getName());
+
+        return productColorDTO;
     }
 
     public void delete(int id) throws Exception {

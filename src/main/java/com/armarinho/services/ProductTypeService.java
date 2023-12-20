@@ -51,7 +51,7 @@ public class ProductTypeService {
         }
     }
 
-    public ProductType create(ProductType productType) throws Exception {
+    public ProductTypeDTO create(ProductType productType) throws Exception {
 
         checkIfTypeNameIsBlank(productType);
         checkIfTypeNameExists(productType);
@@ -60,7 +60,11 @@ public class ProductTypeService {
             ProductTypeDAO dao = new ProductTypeDAO();
             ProductType createProductType = dao.create(productType);
 
-            return createProductType;
+            ProductTypeDTO productTypeDTO = new ProductTypeDTO();
+            productTypeDTO.setId(createProductType.getId());
+            productTypeDTO.setName(createProductType.getName());
+
+            return productTypeDTO;
         } catch (Exception e) {
             throw new Exception("Product type could not be created.");
         }
@@ -104,7 +108,7 @@ public class ProductTypeService {
         }
     }
 
-    public ProductType update(Integer id, ProductType productType) throws Exception {
+    public ProductTypeDTO update(Integer id, ProductType productType) throws Exception {
 
         checkIdNull(id);
         checkIfTypeNameIsBlank(productType);
@@ -113,7 +117,11 @@ public class ProductTypeService {
         ProductTypeDAO dao = new ProductTypeDAO();
         ProductType updateProductType = dao.update(id, productType);
 
-        return updateProductType;
+        ProductTypeDTO productTypeDTO = new ProductTypeDTO();
+        productTypeDTO.setId(updateProductType.getId());
+        productTypeDTO.setName(updateProductType.getName());
+
+        return productTypeDTO;
     }
 
     public void delete(Integer id) throws Exception {

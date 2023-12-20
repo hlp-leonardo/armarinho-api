@@ -15,10 +15,10 @@ public class ProductTypeResource {
     @POST
     @Produces(value = MediaType.APPLICATION_JSON)
     @Consumes(value = MediaType.APPLICATION_JSON)
-    public ProductType create(ProductType productType) throws Exception {
+    public ProductTypeDTO create(ProductType productType) throws Exception {
 
         ProductTypeService service = new ProductTypeService();
-        ProductType createProductType = service.create(productType);
+        ProductTypeDTO createProductType = service.create(productType);
 
         return createProductType;
     }
@@ -48,10 +48,10 @@ public class ProductTypeResource {
     @Produces(value = MediaType.APPLICATION_JSON)
     @Consumes(value = MediaType.APPLICATION_JSON)
     @Path("/{id}")
-    public ProductType update(@PathParam("id") Integer id, ProductType productType) throws Exception {
+    public ProductTypeDTO update(@PathParam("id") Integer id, ProductType productType) throws Exception {
 
         ProductTypeService service = new ProductTypeService();
-        ProductType updateProductType = service.update(id, productType);
+        ProductTypeDTO updateProductType = service.update(id, productType);
 
         return updateProductType;
     }

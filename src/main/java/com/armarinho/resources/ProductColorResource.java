@@ -15,10 +15,10 @@ public class ProductColorResource {
     @POST
     @Produces(value = MediaType.APPLICATION_JSON)
     @Consumes(value = MediaType.APPLICATION_JSON)
-    public ProductColor create(ProductColor productColor) throws Exception {
+    public ProductColorDTO create(ProductColor productColor) throws Exception {
 
         ProductColorService service = new ProductColorService();
-        ProductColor createProductColor = service.create(productColor);
+        ProductColorDTO createProductColor = service.create(productColor);
 
         return createProductColor;
     }
@@ -48,10 +48,10 @@ public class ProductColorResource {
     @Produces(value = MediaType.APPLICATION_JSON)
     @Consumes(value = MediaType.APPLICATION_JSON)
     @Path("/{id}")
-    public ProductColor update(@PathParam("id") Integer id, ProductColor productColor) throws Exception {
+    public ProductColorDTO update(@PathParam("id") Integer id, ProductColor productColor) throws Exception {
 
         ProductColorService service = new ProductColorService();
-        ProductColor updateProductColor = service.update(id, productColor);
+        ProductColorDTO updateProductColor = service.update(id, productColor);
 
         return updateProductColor;
     }

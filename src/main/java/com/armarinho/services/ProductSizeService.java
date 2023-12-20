@@ -51,7 +51,7 @@ public class ProductSizeService {
         }
     }
 
-    public ProductSize create(ProductSize productSize) throws Exception {
+    public ProductSizeDTO create(ProductSize productSize) throws Exception {
 
         checkIfSizeNameIsBlank(productSize);
         checkIfSizeNameExists(productSize);
@@ -60,7 +60,11 @@ public class ProductSizeService {
             ProductSizeDAO dao = new ProductSizeDAO();
             ProductSize createProductSize = dao.create(productSize);
 
-            return createProductSize;
+            ProductSizeDTO productSizeDTO = new ProductSizeDTO();
+            productSizeDTO.setId(createProductSize.getId());
+            productSizeDTO.setName(createProductSize.getName());
+
+            return productSizeDTO;
         } catch (Exception e) {
             throw new Exception("Product size could not be created.");
         }
@@ -104,7 +108,7 @@ public class ProductSizeService {
         }
     }
 
-    public ProductSize update(Integer id, ProductSize productSize) throws Exception {
+    public ProductSizeDTO update(Integer id, ProductSize productSize) throws Exception {
 
         checkIdNull(id);
         checkIfSizeNameIsBlank(productSize);
@@ -113,7 +117,11 @@ public class ProductSizeService {
         ProductSizeDAO dao = new ProductSizeDAO();
         ProductSize updateProductSize = dao.update(id, productSize);
 
-        return updateProductSize;
+        ProductSizeDTO productSizeDTO = new ProductSizeDTO();
+        productSizeDTO.setId(updateProductSize.getId());
+        productSizeDTO.setName(updateProductSize.getName());
+
+        return productSizeDTO;
     }
 
     public void delete(Integer id) throws Exception {

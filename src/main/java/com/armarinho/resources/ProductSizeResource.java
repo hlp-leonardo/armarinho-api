@@ -15,10 +15,10 @@ public class ProductSizeResource {
     @POST
     @Produces(value = MediaType.APPLICATION_JSON)
     @Consumes(value = MediaType.APPLICATION_JSON)
-    public ProductSize create(ProductSize productSize) throws Exception {
+    public ProductSizeDTO create(ProductSize productSize) throws Exception {
 
         ProductSizeService service = new ProductSizeService();
-        ProductSize createProductSize = service.create(productSize);
+        ProductSizeDTO createProductSize = service.create(productSize);
 
         return createProductSize;
     }
@@ -48,10 +48,10 @@ public class ProductSizeResource {
     @Produces(value = MediaType.APPLICATION_JSON)
     @Consumes(value = MediaType.APPLICATION_JSON)
     @Path("/{id}")
-    public ProductSize update(@PathParam("id") Integer id, ProductSize productSize) throws Exception {
+    public ProductSizeDTO update(@PathParam("id") Integer id, ProductSize productSize) throws Exception {
 
         ProductSizeService service = new ProductSizeService();
-        ProductSize updateProductSize = service.update(id, productSize);
+        ProductSizeDTO updateProductSize = service.update(id, productSize);
 
         return updateProductSize;
     }
