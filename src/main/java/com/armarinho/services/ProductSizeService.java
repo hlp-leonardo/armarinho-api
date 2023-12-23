@@ -3,6 +3,8 @@ package com.armarinho.services;
 import com.armarinho.daos.ProductSizeDAO;
 import com.armarinho.dtos.ProductSizeDTO;
 import com.armarinho.models.ProductSize;
+import jakarta.ejb.Stateless;
+import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -12,7 +14,11 @@ import jakarta.persistence.NoResultException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Stateless
 public class ProductSizeService {
+
+    @Inject
+    private ProductSizeDAO dao;
 
     private void checkIdNull(Integer id) throws Exception {
 
@@ -57,7 +63,6 @@ public class ProductSizeService {
         checkIfSizeNameExists(productSize);
 
         try {
-            ProductSizeDAO dao = new ProductSizeDAO();
             ProductSize createProductSize = dao.create(productSize);
 
             ProductSizeDTO productSizeDTO = new ProductSizeDTO();
@@ -72,7 +77,6 @@ public class ProductSizeService {
 
     public List<ProductSizeDTO> getAll() {
 
-        ProductSizeDAO dao = new ProductSizeDAO();
         List<ProductSize> allProductSizes = dao.getAll();
 
         List<ProductSizeDTO> productSizeDTOLis = new ArrayList<>();
@@ -95,7 +99,6 @@ public class ProductSizeService {
         checkIdNull(id);
 
         try {
-            ProductSizeDAO dao = new ProductSizeDAO();
             ProductSize productSize = dao.getOne(id);
 
             ProductSizeDTO productSizeDTO = new ProductSizeDTO();
@@ -114,7 +117,6 @@ public class ProductSizeService {
         checkIfSizeNameIsBlank(productSize);
         checkIfSizeNameExists(productSize);
 
-        ProductSizeDAO dao = new ProductSizeDAO();
         ProductSize updateProductSize = dao.update(id, productSize);
 
         ProductSizeDTO productSizeDTO = new ProductSizeDTO();
@@ -129,7 +131,6 @@ public class ProductSizeService {
         checkIdNull(id);
 
         try {
-            ProductSizeDAO dao = new ProductSizeDAO();
             dao.delete(id);
         } catch (Exception e) {
             throw new Exception("Product size could not be deleted.");

@@ -3,6 +3,8 @@ package com.armarinho.services;
 import com.armarinho.daos.ProductTypeDAO;
 import com.armarinho.dtos.ProductTypeDTO;
 import com.armarinho.models.ProductType;
+import jakarta.ejb.Stateless;
+import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -12,7 +14,11 @@ import jakarta.persistence.NoResultException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Stateless
 public class ProductTypeService {
+
+    @Inject
+    private ProductTypeDAO dao;
 
     private void checkIdNull(Integer id) throws Exception {
 
@@ -57,7 +63,6 @@ public class ProductTypeService {
         checkIfTypeNameExists(productType);
 
         try {
-            ProductTypeDAO dao = new ProductTypeDAO();
             ProductType createProductType = dao.create(productType);
 
             ProductTypeDTO productTypeDTO = new ProductTypeDTO();
@@ -72,7 +77,6 @@ public class ProductTypeService {
 
     public List<ProductTypeDTO> getAll() throws Exception {
 
-        ProductTypeDAO dao = new ProductTypeDAO();
         List<ProductType> allProductTypes = dao.getAll();
 
         List<ProductTypeDTO> productTypeDTOList = new ArrayList<>();
@@ -95,7 +99,6 @@ public class ProductTypeService {
         checkIdNull(id);
 
         try {
-            ProductTypeDAO dao = new ProductTypeDAO();
             ProductType productType = dao.getOne(id);
 
             ProductTypeDTO productTypeDTO = new ProductTypeDTO();
@@ -114,7 +117,6 @@ public class ProductTypeService {
         checkIfTypeNameIsBlank(productType);
         checkIfTypeNameExists(productType);
 
-        ProductTypeDAO dao = new ProductTypeDAO();
         ProductType updateProductType = dao.update(id, productType);
 
         ProductTypeDTO productTypeDTO = new ProductTypeDTO();
@@ -129,7 +131,6 @@ public class ProductTypeService {
         checkIdNull(id);
 
         try {
-            ProductTypeDAO dao = new ProductTypeDAO();
             dao.delete(id);
         } catch (Exception e) {
             throw new Exception("Product type could not be deleted.");

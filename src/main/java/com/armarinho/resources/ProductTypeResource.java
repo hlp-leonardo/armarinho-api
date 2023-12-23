@@ -4,6 +4,7 @@ import com.armarinho.dtos.ProductTypeDTO;
 import com.armarinho.models.ProductType;
 import com.armarinho.services.ProductTypeService;
 
+import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 
@@ -12,12 +13,14 @@ import java.util.List;
 @Path("/product-types")
 public class ProductTypeResource {
 
+    @Inject
+    private ProductTypeService service;
+
     @POST
     @Produces(value = MediaType.APPLICATION_JSON)
     @Consumes(value = MediaType.APPLICATION_JSON)
     public ProductTypeDTO create(ProductType productType) throws Exception {
 
-        ProductTypeService service = new ProductTypeService();
         ProductTypeDTO createProductType = service.create(productType);
 
         return createProductType;
@@ -27,7 +30,6 @@ public class ProductTypeResource {
     @Produces(value = MediaType.APPLICATION_JSON)
     public List<ProductTypeDTO> getAll() throws Exception {
 
-        ProductTypeService service = new ProductTypeService();
         List<ProductTypeDTO> allProductTypes = service.getAll();
 
         return allProductTypes;
@@ -38,7 +40,6 @@ public class ProductTypeResource {
     @Path("/{id}")
     public ProductTypeDTO getOne(@PathParam("id") int id) throws Exception {
 
-        ProductTypeService service = new ProductTypeService();
         ProductTypeDTO ProductType = service.getOne(id);
 
         return ProductType;
@@ -50,7 +51,6 @@ public class ProductTypeResource {
     @Path("/{id}")
     public ProductTypeDTO update(@PathParam("id") Integer id, ProductType productType) throws Exception {
 
-        ProductTypeService service = new ProductTypeService();
         ProductTypeDTO updateProductType = service.update(id, productType);
 
         return updateProductType;
@@ -62,7 +62,6 @@ public class ProductTypeResource {
     @Path("/{id}")
     public void delete(@PathParam("id") Integer id) throws Exception {
 
-        ProductTypeService service = new ProductTypeService();
         service.delete(id);
     }
 }

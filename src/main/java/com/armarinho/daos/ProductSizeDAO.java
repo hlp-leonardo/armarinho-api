@@ -2,10 +2,12 @@ package com.armarinho.daos;
 
 import com.armarinho.models.ProductSize;
 
+import jakarta.ejb.Stateless;
 import jakarta.persistence.*;
 
 import java.util.List;
 
+@Stateless
 public class ProductSizeDAO {
 
     private EntityManager createEntityManager() {

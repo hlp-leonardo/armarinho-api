@@ -3,6 +3,8 @@ package com.armarinho.services;
 import com.armarinho.daos.ProductColorDAO;
 import com.armarinho.dtos.ProductColorDTO;
 import com.armarinho.models.ProductColor;
+import jakarta.ejb.Stateless;
+import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -12,7 +14,11 @@ import jakarta.persistence.NoResultException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Stateless
 public class ProductColorService {
+
+    @Inject
+    private ProductColorDAO dao;
 
     private void checkIdNull(Integer id) throws Exception {
 
@@ -57,7 +63,6 @@ public class ProductColorService {
         checkIfColorNameExists(productColor);
 
         try {
-            ProductColorDAO dao = new ProductColorDAO();
             ProductColor createProductColor = dao.create(productColor);
 
             ProductColorDTO productColorDTO = new ProductColorDTO();
@@ -72,7 +77,6 @@ public class ProductColorService {
 
     public List<ProductColorDTO> getAll() throws Exception {
 
-        ProductColorDAO dao = new ProductColorDAO();
         List<ProductColor> allProductColors = dao.getAll();
 
         List<ProductColorDTO> productColorDTOList = new ArrayList<>();
@@ -95,7 +99,6 @@ public class ProductColorService {
         checkIdNull(id);
 
         try {
-            ProductColorDAO dao = new ProductColorDAO();
             ProductColor productColor = dao.getOne(id);
 
             ProductColorDTO productColorDTO = new ProductColorDTO();
@@ -114,7 +117,6 @@ public class ProductColorService {
         checkIfColorNameIsBlank(productColor);
         checkIfColorNameExists(productColor);
 
-        ProductColorDAO dao = new ProductColorDAO();
         ProductColor updateProductColor = dao.update(id, productColor);
 
         ProductColorDTO productColorDTO = new ProductColorDTO();
@@ -129,7 +131,6 @@ public class ProductColorService {
         checkIdNull(id);
 
         try {
-            ProductColorDAO dao = new ProductColorDAO();
             dao.delete(id);
         } catch (Exception e) {
             throw new Exception("Product color could not be deleted.");

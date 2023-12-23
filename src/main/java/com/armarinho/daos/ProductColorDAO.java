@@ -2,10 +2,12 @@ package com.armarinho.daos;
 
 import com.armarinho.models.ProductColor;
 
+import jakarta.ejb.Stateless;
 import jakarta.persistence.*;
 
 import java.util.List;
 
+@Stateless
 public class ProductColorDAO {
 
     private EntityManager createEntityManager() {

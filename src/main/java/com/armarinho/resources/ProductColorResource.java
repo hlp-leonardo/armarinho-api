@@ -4,6 +4,7 @@ import com.armarinho.dtos.ProductColorDTO;
 import com.armarinho.models.ProductColor;
 import com.armarinho.services.ProductColorService;
 
+import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 
@@ -12,12 +13,14 @@ import java.util.List;
 @Path("/product-colors")
 public class ProductColorResource {
 
+    @Inject
+    private ProductColorService service;
+
     @POST
     @Produces(value = MediaType.APPLICATION_JSON)
     @Consumes(value = MediaType.APPLICATION_JSON)
     public ProductColorDTO create(ProductColor productColor) throws Exception {
 
-        ProductColorService service = new ProductColorService();
         ProductColorDTO createProductColor = service.create(productColor);
 
         return createProductColor;
@@ -27,7 +30,6 @@ public class ProductColorResource {
     @Produces(value = MediaType.APPLICATION_JSON)
     public List<ProductColorDTO> getAll() throws Exception {
 
-        ProductColorService service = new ProductColorService();
         List<ProductColorDTO> allProductColors = service.getAll();
 
         return allProductColors;
@@ -38,7 +40,6 @@ public class ProductColorResource {
     @Path("/{id}")
     public ProductColorDTO getOne(@PathParam("id") Integer id) throws Exception {
 
-        ProductColorService service = new ProductColorService();
         ProductColorDTO productColor = service.getOne(id);
 
         return productColor;
@@ -50,7 +51,6 @@ public class ProductColorResource {
     @Path("/{id}")
     public ProductColorDTO update(@PathParam("id") Integer id, ProductColor productColor) throws Exception {
 
-        ProductColorService service = new ProductColorService();
         ProductColorDTO updateProductColor = service.update(id, productColor);
 
         return updateProductColor;
@@ -62,7 +62,6 @@ public class ProductColorResource {
     @Path("/{id}")
     public void delete(@PathParam("id") int id) throws Exception {
 
-        ProductColorService service = new ProductColorService();
         service.delete(id);
 
     }
