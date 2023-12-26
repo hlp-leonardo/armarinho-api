@@ -2,6 +2,8 @@ package com.armarinho.models;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "PRODUCTS")
 public class Product {
@@ -28,6 +30,10 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "PRODUCT_COLOR_FK")
     private ProductColor productColor;
+
+    @ManyToMany
+    @JoinTable(name = "SALE_PRODUCTS", joinColumns = @JoinColumn(name = "PRODUCT_FK"), inverseJoinColumns = @JoinColumn(name = "SALE_FK"))
+    private List<Sale> sales;
 
     public Integer getId() {
         return id;
@@ -75,5 +81,13 @@ public class Product {
 
     public void setProductColor(ProductColor productColor) {
         this.productColor = productColor;
+    }
+
+    public List<Sale> getSales() {
+        return sales;
+    }
+
+    public void setSales(List<Sale> sales) {
+        this.sales = sales;
     }
 }

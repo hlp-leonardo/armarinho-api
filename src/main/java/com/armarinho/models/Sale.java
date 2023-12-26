@@ -17,8 +17,8 @@ public class Sale {
     @Column(name = "SALE_DATE")
     private Date date;
 
-    @OneToMany(mappedBy = "sale")
-    private List<SaleProduct> sale;
+    @ManyToMany(mappedBy = "sales")
+    private List<Product> products;
 
     public Integer getId() {
         return id;
@@ -36,11 +36,11 @@ public class Sale {
         this.date = date;
     }
 
-    public List<SaleProduct> getSale() {
-        return sale;
+    public List<Product> getProducts() {
+        return products;
     }
 
-    public void setSale(List<SaleProduct> sale) {
-        this.sale = sale;
+    public void setProduct(List<Product> products) {
+        this.products = products;
     }
 }
