@@ -2,10 +2,17 @@ package com.armarinho.services;
 
 import com.armarinho.daos.SaleDAO;
 import com.armarinho.models.Sale;
+import jakarta.ejb.Stateless;
+import jakarta.inject.Inject;
 
+import java.time.Instant;
 import java.util.List;
 
+@Stateless
 public class SaleService {
+
+    @Inject
+    private SaleDAO dao;
 
     private void checkIdNull(Integer id) throws Exception {
 
@@ -16,7 +23,6 @@ public class SaleService {
 
     public Sale create(Sale sale) {
 
-        SaleDAO dao = new SaleDAO();
         Sale createSale = dao.create(sale);
 
         return createSale;
@@ -24,7 +30,6 @@ public class SaleService {
 
     public List<Sale> getAll() {
 
-        SaleDAO dao = new SaleDAO();
         List<Sale> allSales = dao.getAll();
 
         return allSales;
@@ -34,7 +39,6 @@ public class SaleService {
 
         checkIdNull(id);
 
-        SaleDAO dao = new SaleDAO();
         Sale sale = dao.getOne(id);
 
         return sale;
@@ -44,7 +48,6 @@ public class SaleService {
 
         checkIdNull(id);
 
-        SaleDAO dao = new SaleDAO();
         Sale updateSale = dao.update(id, sale);
 
         return updateSale;
@@ -54,7 +57,6 @@ public class SaleService {
 
         checkIdNull(id);
 
-        SaleDAO dao = new SaleDAO();
         dao.delete(id);
 
     }

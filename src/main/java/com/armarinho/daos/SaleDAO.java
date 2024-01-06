@@ -1,11 +1,18 @@
 package com.armarinho.daos;
 
+import com.armarinho.dtos.ProductDTO;
+import com.armarinho.models.Product;
 import com.armarinho.models.Sale;
 
+import jakarta.ejb.Stateless;
 import jakarta.persistence.*;
 
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+@Stateless
 public class SaleDAO {
 
     private EntityManager createEntityManager() {
@@ -38,7 +45,7 @@ public class SaleDAO {
         EntityManager em = createEntityManager();
 
         sale.setId(sale.getId());
-        sale.setDate(sale.getDate());
+        sale.setDate(Date.from(Instant.now()));
 
         em.getTransaction().begin();
         em.persist(sale);
